@@ -42,7 +42,8 @@
         <page name='38. 面向协议编程'/>
         <page name='39. 响应式编程'/>
         <page name='40. 内存布局'/>
-        <page name='41. Swift源码分析'/>
+        <page name='41. 动态成员查找与调用'/>
+        <page name='99. Swift源码分析'/>
         <page name='100. Temp'/>
     </pages>
 </playground>

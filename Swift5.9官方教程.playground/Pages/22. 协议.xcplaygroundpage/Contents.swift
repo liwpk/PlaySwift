@@ -1,18 +1,37 @@
 // Apple 官方 Swift 教程
 /**
- 协议定义里一个蓝图，规定了用来实现某一特定任务或者功能的方法、属性，以及其他需要的东西。
- 类、结构体或枚举都可以遵循协议，并为协议定义的这些要求提供具体实现。
- 某个类型能够满足某个协议的要求，就可以说该类型遵循这个协议。
+    协议定义里一个蓝图，规定了用来实现某一特定任务或者功能的方法、属性，以及其他需要的东西。
+    类、结构体或枚举都可以遵循协议，并为协议定义的这些要求提供具体实现。
+        如果需要某个协议只能被类遵守，可以使用class关键字来修饰：  protocol ClassProtocol:class { }
+    某个类型能够满足某个协议的要求，就可以说该类型遵循这个协议。
+ 
+    协议可以继承协议：继承后，它就会拥有父协议中声明的属性和方法。
  */
 import UIKit
-// 属性要求 : 协议可以要求遵循协议的类型提供特定名称和类型的实例属性或类属性
+// 协议中定义属性 : 协议可以要求遵循协议的类型提供特定名称和类型的实例属性或类属性
 protocol FullyNamed {
-    var fullName: String { get }
+    var fullName: String { get }   // 可读的
+    var name: String { set get }   // 可读 可写的
+    static var className: String { get }
 }
 struct Person2: FullyNamed {
-    var fullName: String
+    var fullName: String           // 进行协议中属性的实现
+    var name: String
+    static var className: String {
+        get {
+            return "Person2"
+        }
+    }
+    init() {
+        fullName = "David Li"
+        name = "DD"
+    }
 }
-let john = Person2(fullName: "John Appleseed")
+var john = Person2()
+print(john.fullName)
+john.name = "TT"
+john.fullName = "x"
+print(john.name)
 
 class Starship: FullyNamed {
     var prefix: String?
@@ -24,12 +43,15 @@ class Starship: FullyNamed {
     var fullName: String {
         return (prefix ?? "") + name
     }
+    static var className: String {
+        return "Starship"
+    }
 }
 var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
 var ncc1702 = Starship(name: "Enterprise")
-print(ncc1701.fullName,ncc1702.fullName)
+print(ncc1701.fullName, ncc1702.fullName)
 
-// 方法要求 : 协议可以要求遵循协议的类型实现某些指定的实例方法或类方法
+// 协议中定义方法 : 协议可以要求遵循协议的类型实现某些指定的实例方法或类方法
 protocol RandomNumberGenerator {
     func random() -> Double
 }
@@ -306,7 +328,7 @@ for object in objects {
     }
 }
 
-// 可选的协议要求 : 可选要求用在你需要和 Objective-C 打交道的代码中。协议和可选要求必须带上 @objc 属性。
+// 可选的协议要求 : 可选要求声明为optional。协议和可选要求必须带上 @objc 关键字。
 @objc protocol CounterDataSource {
     @objc optional func increment(forCount count: Int) -> Int
     @objc optional var fixedIncrement: Int { get }

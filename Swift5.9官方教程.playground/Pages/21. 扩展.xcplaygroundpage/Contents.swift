@@ -1,8 +1,7 @@
 // Apple 官方 Swift 教程
 /**
- 扩展可以给一个现有的类、结构体、枚举、协议添加新的功能。
- 它还拥有不需要访问被扩展类型源代码就能完成扩展的能力（即逆向建模）。
- 扩展可以给一个类型添加新的功能，但是不能重写已经存在的功能。
+    扩展, 可以给一个现有的数据类型（类、结构体、枚举、协议）追加新的功能。 但是不能重写已经存在的功能。
+    它还拥有不需要访问被扩展类型源代码就能完成扩展的能力（即逆向建模）。
  */
 
 import UIKit
@@ -21,11 +20,11 @@ print("Three feet is \(threeFeet) meters")
 let aMarathon = 42.km + 195.m
 print("A marathon is \(aMarathon) meters long")
 /**
- 扩展可以添加新的计算属性，但是它们不能添加存储属性，或向现有的属性添加属性观察器。
+    扩展添加新的 计算属性 ，但是它们 不能添加存储属性，或向现有的属性添加属性观察器。
  */
 
 
-// 构造器
+
 struct Size {
     var width = 0.0, height = 0.0
 }
@@ -40,6 +39,7 @@ struct Rect {
 let defaultRect = Rect()
 let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0), size: Size(width: 5.0, height: 5.0))
 
+// 扩展添加构造器
 extension Rect {
     init(center: Point, size: Size) {
         let originX = center.x - size.width/2
@@ -49,7 +49,7 @@ extension Rect {
 }
 let centerRect = Rect(center: Point(x: 4.0, y: 4.0), size: Size(width: 3.0, height: 3.0))
 
-// 方法
+// 扩展添加方法
 extension Int {
     func squared() -> Int {
         return self * self
@@ -65,7 +65,7 @@ extension Int {
     }
 }
 
-// 下标： 扩展可以给现有的类型添加新的下标
+// 扩展添加下标
 extension Int {
     subscript(digitIndex: Int) -> Int {
         var decimalBase = 1
@@ -78,6 +78,18 @@ extension Int {
 print(234234534[0])
 print(234234534[1])
 print(234234534[4])
+
+// 扩展添加协议：使用扩展让某个类遵守一个协议
+protocol MyProtocol {
+    func myFunc();
+}
+extension Int: MyProtocol {   // 如果使用扩展使某个数据类型遵守了一个协议，那么在此扩展中就需要实现该协议中的方法
+    func myFunc() {
+        print("myFunc")
+    }
+}
+var iii = 333;
+iii.myFunc()
 
 // 嵌套类型
 extension Int {

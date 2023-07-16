@@ -46,6 +46,7 @@ for item in library {
 }
 print("Media library contains \(movieCount) movies and \(songCount) songs.")
 
+
 // 向下转型 ： 当不确定向下转型是否成功时，用类型转换的条件形式（as?）
 for item in library {
     if let movie = item as? Movie {
@@ -58,8 +59,9 @@ for item in library {
 // Any 和 AnyObject 的类型转换
 /**
  Swift 为不确定类型提供了两种特殊的类型别名：
- Any 可以表示任何类型，包括函数类型
- AnyObject 可以表示任何类型的实例
+    AnyObject 可以表示任何类型的实例, 是通用的引用类型，不能用来描述值类型。
+    Any       更加通用，可以表示任何类型，包括值类型、引用类型。
+    
  */
 var things: [Any] = []
 things.append(0)

@@ -112,7 +112,7 @@ func eat(item: String) throws {
     }
 }
 
-// 3. 将错误转成可选值
+// 3. 将错误转成可选值:  使用 try? 来将错误转成可选值
 func fetchData() -> Data? {
     if let data = try? fetchDataFromDisk() { return data }
     if let data = try? fetchDataFromServer() { return data }
